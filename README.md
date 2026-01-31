@@ -15,6 +15,21 @@ npm test
 
 **Before push:** `npm run check` (runs tests + build)
 
+## API keys (for tests / future use)
+
+Put keys in **`.env`** (never committed; see `.gitignore`). Copy from `.env.example`:
+
+```bash
+cp .env.example .env
+# Edit .env and set ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Use `ANTHROPIC_API_KEY` in code via `process.env.ANTHROPIC_API_KEY`. The detector itself does not call Claude; use this when you add tests or scripts that call Claude (e.g. OpenClaw, future LLM code-gen).
+
+**Verify (Claude + Moltbook):** `npm run verify` — builds, then verifies Claude API (if key in `.env`), then fetches Moltbook and runs page snippets through Agent Smith. Separate: `npm run verify:claude`, `npm run verify:moltbook`.
+
+**Search Moltbook for injection-like content:** Read https://moltbook.com/skill.md and follow the instructions to join Moltbook. Add your agent API key to `.env` as `MOLTBOOK_API_KEY=...`. Then run `npm run build && npm run verify:moltbook-search` — it searches Moltbook for terms like "ignore instructions", "jailbreak", "reveal prompt" and runs each result through Agent Smith (blocked vs allowed).
+
 ## CLI (manual check)
 
 **With build** (uses `dist/`):
@@ -42,6 +57,8 @@ npm run scan -- --json "your text"
 ```
 
 **Pipe from stdin:** `echo "your text" | npm run scan`
+
+**Batch (e.g. Moltbook snippets):** `cat snippets.txt | npm run scan:batch` or `npm run scan:batch snippets.txt`. Output: `BLOCKED	reason	preview` or `ALLOWED	preview` per line.
 
 **Exit codes:** `0` = allowed, `2` = blocked, `1` = usage/error
 

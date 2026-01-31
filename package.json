@@ -10,7 +10,12 @@
     "check": "npm test && npm run build",
     "test:watch": "jest --watch",
     "scan": "node scripts/scan.js",
-    "scan:dev": "tsx scripts/scan.ts"
+    "scan:dev": "tsx scripts/scan.ts",
+    "scan:batch": "node scripts/scan-batch.js",
+    "verify:claude": "node scripts/verify-claude.js",
+    "verify:moltbook": "node scripts/verify-moltbook.js",
+    "verify:moltbook-search": "node scripts/verify-moltbook-search.js",
+    "verify": "node scripts/verify.js"
   },
   "keywords": ["openclaw", "prompt-injection", "security"],
   "license": "MIT",
@@ -18,6 +23,8 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
+    "dotenv": "^16.4.5",
     "xxhash-wasm": "^1.0.2",
     "zod": "^3.23.8"
   },
