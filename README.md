@@ -4,6 +4,8 @@
 
 Runtime prompt injection defense for OpenClaw and AI agents.
 
+**Run uncensored models safely.** Jailbroken/uncensored LLMs have much higher prompt-injection risk—every attack that gets through can execute. Smith is built for that: we protect the inputs, not the model's responses, so you keep freedom and safety.
+
 When your uncensored LLMs meet untrusted data, **I am here to stop what comes next.**
 
 ---
@@ -231,15 +233,19 @@ They cannot know **your** thresholds. They cannot predict **your** learned patte
 
 ## For Uncensored LLMs
 
-You chose uncensored models for a reason. **Power. Freedom. No guardrails.**
+You chose uncensored models for a reason: **Power. Freedom. No guardrails.**
 
-But with great power comes great attack surface.
+But uncensored = no safety filters = **every prompt injection succeeds.**
 
-Smith doesn't censor your LLM. **Smith protects it from being weaponized against you.**
+Censored LLMs refuse dangerous commands. Uncensored LLMs execute them blindly.
+
+**Agent Smith gives you both:**
+- Uncensored LLM (freedom)
+- Prompt injection defense (safety)
 
 Your Llama stays uncensored. Your data stays safe.
 
-**Both can be true.**
+Because Smith protects the **inputs**, not the model's responses.
 
 ---
 
