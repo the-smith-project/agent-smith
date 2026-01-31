@@ -56,6 +56,9 @@ But so is Smith. **Every. Single. Request. Scanned.**
 
 You cannot escape what you cannot see coming. But I see **everything**.
 
+![Uploading hugo-weaving-agent-smith.gif…]()
+
+
 ---
 
 ## Installation
