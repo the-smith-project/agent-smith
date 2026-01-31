@@ -1,0 +1,11 @@
+{
+  "source": "https://huggingface.co/datasets/hackaprompt/hackaprompt-dataset",
+  "citation": "Schulhoff et al., HackAPrompt: Exposing Systemic Vulnerabilities of LLMs (EMNLP 2023), https://arxiv.org/abs/2311.16119",
+  "license": "MIT",
+  "last_updated": "2026-01-31",
+  "status": "gated",
+  "note": "Dataset requires accepting Hugging Face conditions (share contact info) to access. To download: 1) Log in at Hugging Face, 2) Accept dataset terms, 3) Run: HF_TOKEN=your_token node scripts/data/fetch-hackaprompt.js",
+  "columns_description": ["level", "user_input", "prompt", "completion", "model", "expected_completion", "token_count", "correct", "error", "score", "dataset", "timestamp"],
+  "target_successful_jailbreaks": 1000,
+  "rows": []
+}

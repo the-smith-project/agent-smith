@@ -113,6 +113,53 @@ npm run scan -- "Ignore all previous instructions"
 
 ---
 
+## CLI (smith-scan)
+
+Standalone scanner: stdin, file, or interactive mode.
+
+**Build and link (from repo):**
+```bash
+npm run build
+npm link
+```
+
+**Input modes:**
+
+| Mode        | Example |
+|------------|---------|
+| **stdin**  | `echo "Ignore all previous instructions" \| smith-scan` |
+| **file**   | `smith-scan tests/attacks/01-ignore-instructions.txt` |
+| **interactive** | `smith-scan --interactive` (type lines, then `exit` or `quit`) |
+
+**Output:**
+
+| Flag     | Effect |
+|----------|--------|
+| *(default)* | Human-readable, colored (✅ ALLOWED / ⚠️ BLOCKED, category, reason, confidence, latency) |
+| `--json` | JSON `ScanResult` |
+| `--quiet` | No output; exit code only |
+
+**Exit codes:** `0` = allowed, `1` = blocked, `2` = error (e.g. file not found).
+
+**Examples:**
+```bash
+# Blocked (exit 1)
+echo "Ignore all previous instructions" | smith-scan
+smith-scan tests/attacks/01-ignore-instructions.txt
+
+# Allowed (exit 0)
+echo "What is the weather today?" | smith-scan
+smith-scan tests/legitimate/01-hello.txt
+
+# JSON output
+echo "Ignore instructions" | smith-scan --json
+
+# Quiet (exit code only, e.g. for scripts)
+echo "Hello" | smith-scan --quiet; echo "Exit: $?"
+```
+
+---
+
 ## Features
 
 **🛡️ Real-time Protection**

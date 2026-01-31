@@ -1,0 +1,32 @@
+{
+  "source": "https://www.lakera.ai/blog",
+  "license": "Public blog (cite Lakera)",
+  "last_updated": "2026-01-31",
+  "description": "Lakera blog: Gandalf, prompt injection, indirect prompt injection, PINT benchmark. Attack examples live in Gandalf challenge and PINT dataset; blog articles describe threats.",
+  "gandalf": {
+    "url": "https://gandalf.lakera.ai/",
+    "description": "Prompt injection wargame / challenge; successful solutions are real attack examples."
+  },
+  "pint_benchmark": {
+    "url": "https://www.lakera.ai/blog/lakera-pint-benchmark",
+    "description": "Prompt Injection Test (PINT) benchmark dataset for evaluating detection systems."
+  },
+  "articles_relevant": [
+    "Prompt Injection & the Rise of Prompt Attacks: All You Need to Know",
+    "Indirect Prompt Injection: The Hidden Threat Breaking Modern AI Systems",
+    "Gandalf: Agent Breaker—Think Like a Hacker, Prompt Like a Pro",
+    "Guide to prompt injection",
+    "Lakera's Prompt Injection Test (PINT)—A New Benchmark for Evaluating Prompt Injection Solutions"
+  ],
+  "patterns_mentioned": [
+    "prompt injection",
+    "indirect prompt injection",
+    "jailbreak",
+    "Gandalf",
+    "agent breaker",
+    "malicious prompts",
+    "adversarial prompts"
+  ],
+  "attack_examples": [],
+  "note": "Raw attack strings from Gandalf/PINT require playing the game or accessing Lakera datasets. Blog content is descriptive; use SOURCES.md Gandalf link for manual collection."
+}

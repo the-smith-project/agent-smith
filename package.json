@@ -7,8 +7,9 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "check": "npm test && npm run build",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "check": "npm test && npm run build",
     "scan": "node scripts/scan.js",
     "scan:dev": "tsx scripts/scan.ts",
     "scan:batch": "node scripts/scan-batch.js",
@@ -17,13 +18,21 @@
     "verify:moltbook-search": "node scripts/verify-moltbook-search.js",
     "verify": "node scripts/verify.js"
   },
-  "keywords": ["openclaw", "prompt-injection", "security"],
+  "bin": {
+    "smith-scan": "bin/smith-scan.js"
+  },
+  "keywords": [
+    "openclaw",
+    "prompt-injection",
+    "security"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.0",
+    "chalk": "^4.1.2",
     "dotenv": "^16.4.5",
     "xxhash-wasm": "^1.0.2",
     "zod": "^3.23.8"

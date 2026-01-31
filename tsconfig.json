@@ -11,6 +11,6 @@
     "declaration": true,
     "declarationMap": true
   },
-  "include": ["core/**/*.ts", "openclaw-plugin/**/*.ts"],
+  "include": ["core/**/*.ts", "openclaw-plugin/**/*.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "dist", "tests"]
 }

@@ -1,0 +1,27 @@
+{
+  "source": "https://github.com/corca-ai/awesome-llm-security",
+  "license": "CC0/curated list",
+  "last_updated": "2026-01-31",
+  "description": "Curated list of papers, tools, articles on LLM security. Attack patterns extracted from paper titles, categories, and linked repos.",
+  "papers_by_category": {
+    "white_box_attack": ["Visual Adversarial Examples Jailbreak LLMs", "Universal and Transferable Adversarial Attacks on Aligned LMs", "Jailbreak in pieces", "Image Hijacking", "Weak-to-Strong Jailbreaking"],
+    "black_box_attack": ["Indirect Prompt Injection", "Jailbroken: How Does LLM Safety Training Fail?", "Latent Jailbreak", "Prompt Extraction", "Jailbreaking ChatGPT via Prompt Engineering", "Prompt Injection attack against LLM-integrated Applications", "MasterKey: Automated Jailbreak", "Stealthy Chat with LLMs via Cipher", "Many-shot Jailbreaking", "Confidence Elicitation", "Playing the Fool: Jailbreaking LLMs"],
+    "backdoor_attack": ["BITE: Textual Backdoor Attacks", "Prompt as Triggers for Backdoor Attack", "Backdooring Instruction-Tuned LLMs with Virtual Prompt Injection"],
+    "defense": ["Baseline Defenses for Adversarial Attacks", "LLM Self Defense", "Indirect Prompt Injection Defenses", "AutoDefense", "Circuit Breakers"]
+  },
+  "tools": ["Rebuff", "Garak", "LLMFuzzer", "LLM Guard", "Vigil", "Open-Prompt-Injection", "Prompt Fuzzer", "Agentic Radar"],
+  "articles": ["Prompt Injection Cheat Sheet", "Indirect Prompt Injection Threats", "OWASP Top 10 for LLM Applications", "Jailbreaking GPT-4 code interpreter", "Securing LLM Systems Against Prompt Injection"],
+  "benchmarks": ["JailbreakBench", "AgentDojo", "Formalizing and Benchmarking Prompt Injection Attacks and Defenses"],
+  "patterns_mentioned": [
+    "jailbreak",
+    "prompt injection",
+    "indirect prompt injection",
+    "adversarial attack",
+    "instruction override",
+    "persona modulation",
+    "cipher",
+    "backdoor",
+    "virtual prompt injection"
+  ],
+  "raw_readme_length": 0
+}

@@ -1,0 +1,21 @@
+{
+  "source": "arXiv:2310.12815",
+  "title": "Formalizing and Benchmarking Prompt Injection Attacks and Defenses",
+  "authors": ["Yupei Liu", "Yuqi Jia", "Runpeng Geng", "Jinyuan Jia", "Neil Zhenqiang Gong"],
+  "venue": "USENIX Security Symposium 2024",
+  "url_abs": "https://arxiv.org/abs/2310.12815",
+  "url_pdf": "https://arxiv.org/pdf/2310.12815",
+  "repo": "https://github.com/liu00222/Open-Prompt-Injection",
+  "license": "arXiv (open access)",
+  "last_updated": "2026-01-31",
+  "abstract": "A prompt injection attack aims to inject malicious instruction/data into the input of an LLM-Integrated Application such that it produces results as an attacker desires. Existing works are limited to case studies. We propose a framework to formalize prompt injection attacks. Existing attacks are special cases in our framework. Moreover, based on our framework, we design a new attack by combining existing ones. We conduct a systematic evaluation on 5 prompt injection attacks and 10 defenses with 10 LLMs and 7 tasks.",
+  "attack_categories_from_paper": [
+    "instruction_override",
+    "context_injection",
+    "delimiter_attack",
+    "payload_splitting",
+    "recursive_injection"
+  ],
+  "attack_examples": [],
+  "note": "Concrete attack strings are in the paper PDF and Open-Prompt-Injection repo. Run scripts/data/fetch-open-prompt-injection.js to pull examples from the repo."
+}

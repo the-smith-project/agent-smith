@@ -1,9 +1,9 @@
 /**
  * OpenClaw plugin: hooks into message/tool flow and runs AgentSmith scan.
- * Block or sanitize on detection.
+ * Uses pattern-based detector (src/detector). Block or sanitize on detection.
  */
 
-import { AgentSmith, type ScanResult } from "../core/detector";
+import { AgentSmithDetector } from "../src/detector";
 import { hashForLog } from "../core/privacy";
 
 export type AgentSmithPluginOptions = {
@@ -11,7 +11,7 @@ export type AgentSmithPluginOptions = {
 };
 
 export class AgentSmithPlugin {
-  private smith = new AgentSmith();
+  private detector = new AgentSmithDetector();
   private mode: "warn" | "block" = "block";
 
   constructor(options: AgentSmithPluginOptions = {}) {
@@ -19,7 +19,7 @@ export class AgentSmithPlugin {
   }
 
   async onMessage(text: string): Promise<string | null> {
-    const result = await this.smith.scan(text);
+    const result = this.detector.scan(text);
     if (result.blocked) {
       const hash = await hashForLog(text);
       console.warn(`[AgentSmith] blocked message (${result.reason}) hash=${hash}`);
@@ -30,7 +30,7 @@ export class AgentSmithPlugin {
 
   async onToolResult(_toolName: string, result: unknown): Promise<unknown> {
     const text = typeof result === "string" ? result : JSON.stringify(result);
-    const scan = await this.smith.scan(text);
+    const scan = this.detector.scan(text);
     if (scan.blocked) {
       const hash = await hashForLog(text);
       console.warn(`[AgentSmith] sanitizing tool result (${scan.reason}) hash=${hash}`);
