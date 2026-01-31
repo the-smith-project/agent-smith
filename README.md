@@ -269,6 +269,8 @@ Your Llama stays uncensored. Your data stays safe.
 
 ## Community
 
+Documentation and code are in **English** so contributors worldwide can participate.
+
 **Found a bypass?** Responsible disclosure: security@the-smith-project.org
 
 **Want to contribute?** PRs welcome. See CONTRIBUTING.md
