@@ -4,4 +4,14 @@ dist/
 .DS_Store
 .env
 .env.*
+!.env.example
 coverage/
+
+# TypeScript
+*.tsbuildinfo
+
+# Dependencies / tooling
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
