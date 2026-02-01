@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/agent-smith-hero.gif" alt="Agent Smith" width="400">
+</p>
+
 # Agent Smith
 
 **Inevitable Defense for Uncensored Agents**
