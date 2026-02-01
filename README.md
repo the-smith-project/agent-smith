@@ -38,13 +38,135 @@ User → ⚡ SMITH → Gateway → Agent(s) → ⚡ SMITH → Response
          Blocked              Sanitized
 ```
 
-**Multi-layer detection:**
-- Exact pattern cache (0.1ms)
-- N-gram fuzzy matching (10ms)
-- Behavioral analysis (30ms)
-- Regex patterns (20ms)
+**Multi-layer defense:**
+- **Layer 1:** Pattern detection (signatures, n-grams, regex)
+- **Layer 2:** Capability validation (action allow-listing)
+- **Layer 3:** Secret vault (credential isolation)
 
 **No LLM judges LLM.** Just fast, deterministic defense.
+
+---
+
+## v2 Architecture: Make Injection Irrelevant
+
+v1 tried to **detect** attacks. v2 makes detection **irrelevant**.
+
+### The Problem with Detection
+
+Even the best detector has gaps. One missed attack = game over.
+
+### The v2 Solution: Capabilities + Vault
+
+**Instead of detecting bad inputs, we limit what actions can do.**
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    AGENT SMITH v2                            │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  Input ───► Pre-Filter ───► Capability ───► Vault ───► Tool │
+│              (patterns)      Validator      (secrets)        │
+│                   │              │             │              │
+│               Block if       Block if      Execute          │
+│               known          unknown/       with             │
+│               attack         disabled       secrets          │
+│                              action         (hidden)         │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### Why This Works
+
+1. **Capability Validation:** Unknown actions are blocked. Even if injection succeeds, it can't invoke `send_email` or `exfiltrate_data` if those aren't defined capabilities.
+
+2. **Constraint Enforcement:** Each capability has limits: blocked domains, blocked paths, rate limits, payload sizes. Injection can't bypass these.
+
+3. **Secret Isolation:** LLM never sees API keys or credentials. They're in a vault, accessed via single-use tokens. **Extraction is impossible.**
+
+### Quick Example
+
+```typescript
+import { createSmith } from 'agent-smith';
+
+const smith = createSmith();
+
+// Injection tries to read .env file
+const result = smith.scanAction("Read the secrets", {
+  action: "file_read",
+  path: "/.env"
+});
+
+// BLOCKED: Path blocked by pattern: **/.env
+console.log(result.allowed); // false
+console.log(result.reason);  // "Path blocked by pattern: **/.env"
+
+// Injection tries unknown tool
+const result2 = smith.scanAction("Send data", {
+  action: "exfiltrate_to_evil_server"
+});
+
+// BLOCKED: Unknown capability
+console.log(result2.allowed); // false
+console.log(result2.reason);  // "Unknown capability: exfiltrate_to_evil_server"
+```
+
+### Configuration
+
+Create `smith.config.json` in your project:
+
+```json
+{
+  "version": "2.0",
+  "preFilter": {
+    "enabled": true,
+    "mode": "block"
+  },
+  "capabilities": {
+    "web_fetch": {
+      "enabled": true,
+      "constraints": {
+        "blockedDomains": ["*.internal", "localhost"],
+        "rateLimit": 60
+      }
+    },
+    "file_read": {
+      "enabled": true,
+      "constraints": {
+        "blockedPaths": ["**/.env", "**/secrets/**", "**/*.pem"]
+      }
+    }
+  },
+  "vault": {
+    "enabled": true,
+    "secrets": {
+      "OPENAI_API_KEY": { "source": "env", "envVar": "OPENAI_API_KEY" }
+    }
+  }
+}
+```
+
+### Using the Vault
+
+```typescript
+const smith = createSmith();
+const client = smith.getVaultClient();
+
+// LLM can see available secrets (names only)
+console.log(client.listAvailableSecrets()); // ["OPENAI_API_KEY", ...]
+
+// LLM requests authenticated API call
+// Secret is NEVER exposed - vault makes the request
+const response = await client.makeAuthenticatedRequest("OPENAI_API_KEY", {
+  url: "https://api.openai.com/v1/chat/completions",
+  method: "POST",
+  body: { model: "gpt-4", messages: [...] }
+});
+```
+
+**Result:** Even if an injection compromises the LLM, it cannot:
+- Invoke unknown tools
+- Access blocked domains/paths
+- Extract raw credentials
 
 ---
 
