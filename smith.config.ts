@@ -196,6 +196,7 @@ export const DEFAULT_CONFIG: SmithConfig = {
       constraints: {
         requireConfirmation: false,
         rateLimit: 120,
+        customValidator: "block_dangerous_shell",
       },
     },
 

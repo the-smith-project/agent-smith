@@ -18,6 +18,7 @@ import { SecretVault, httpExecutor } from "./vault";
 import { VaultClient, openaiExecutor, anthropicExecutor } from "./vault-client";
 import { loadConfig, type SmithConfig, type ValidationResult } from "../smith.config";
 import { hashForLog } from "./privacy";
+import { blockDangerousShell } from "./sentinel-policy";
 
 // ============================================================================
 // V2 SCAN RESULT
@@ -63,6 +64,7 @@ export class AgentSmithV2 {
     // Initialize layers
     this.detector = new AgentSmithDetector();
     this.capabilityValidator = new CapabilityValidator(this.config);
+    this.capabilityValidator.registerCustomValidator("block_dangerous_shell", blockDangerousShell);
     
     if (this.config.vault) {
       this.vault = new SecretVault(this.config.vault);
